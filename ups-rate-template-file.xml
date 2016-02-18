@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <soap:Header>
+          <UPSSecurity xmlns="http://www.ups.com/XMLSchema/XOLTWS/UPSS/v1.0">
+              <UsernameToken>
+                  <Username>xxxxxxxxx</Username> <!-- UPS username -->
+                  <Password>xxxxxxxxx</Password> <!-- UPS passowrd -->
+              </UsernameToken>
+              <ServiceAccessToken>
+                  <AccessLicenseNumber>xxxxxxxxxxxxxxxxxx</AccessLicenseNumber> <!-- UPS access code -->
+              </ServiceAccessToken>
+          </UPSSecurity>
+  </soap:Header>
+  <soap:Body>
+          <RateRequest xmlns="http://www.ups.com/XMLSchema/XOLTWS/Rate/v1.1">
+              <Request xmlns="http://www.ups.com/XMLSchema/XOLTWS/Common/v1.0">
+                  <RequestOption>rate</RequestOption>
+              </Request>
+              <CustomerClassification>
+                  <Code>00</Code>
+              </CustomerClassification>
+              <Shipment>
+                  <Shipper>
+                      <ShipperNumber><!--SHIPPERACCOUNT--></ShipperNumber>
+                      <Address>
+                          <StateProvinceCode><!--SHIPPERSTATE--></StateProvinceCode>
+                          <PostalCode><!--SHIPPERZIP--></PostalCode>
+                          <CountryCode><!--SHIPPERCOUNTRY--></CountryCode>
+                      </Address>
+                  </Shipper>
+                  <ShipTo>
+                      <Address>
+                      	  <City><!--SHIPTOCITY--></City>
+                          <StateProvinceCode><!--SHIPTOSTATE--></StateProvinceCode>
+                          <PostalCode><!--SHIPTOZIP--></PostalCode>
+                          <CountryCode><!--SHIPTOCOUNTRY--></CountryCode>
+                          <!--SHIPTORESIDENTIALINDICATOR-->
+                      </Address>
+                  </ShipTo>
+                  <ShipFrom>
+                      <Address>
+                          <StateProvinceCode><!--SHIPPERSTATE--></StateProvinceCode>
+                          <PostalCode><!--SHIPPERZIP--></PostalCode>
+                          <CountryCode><!--SHIPPERCOUNTRY--></CountryCode>
+                      </Address>
+                  </ShipFrom>
+                  <!-- The package xml node is constructed like such. You have a package element for 
+                       each package in the shipment. -->
+                  <!--PACKAGES-->                
+                  <ShipmentRatingOptions>
+                      <NegotiatedRatesIndicator>0</NegotiatedRatesIndicator>                    
+                  </ShipmentRatingOptions>
+                  <ShipmentServiceOptions>
+                      <SaturdayDeliveryIndicator><!--SHIPSATURDAY--></SaturdayDeliveryIndicator>
+                  </ShipmentServiceOptions>        
+                  <Service>
+                      <Code><!--UPSMETHODCODE--></Code><!-- code for the UPS Service associated with the shipment. see pg 47 of Rating XML pdf -->
+                  </Service>        
+              </Shipment>
+          </RateRequest>
+  </soap:Body>
+  </soap:Envelope>
